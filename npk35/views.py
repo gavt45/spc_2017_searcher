@@ -1,7 +1,7 @@
 import os
 from django.http import HttpResponse
 from .forms import NameForm
-from . import searcher_settings
+from . import searcher_settings, search
 
 def main(request):
     resp = \
@@ -33,9 +33,8 @@ def process(request):
         form = NameForm()
 
     output = 'RESULTS:<br>'
-    for f in os.listdir(searcher_settings.PATH):
-        if f.__contains__(request.POST['process']):
-            output += f + '<br>'
+    # query is request.POST['process']
+    sch = search.search(defaultpath=searcher_settings.PATH, jsonFile=searcher_settings.JSON_NAME)
 
     resp = \
         u"""<!DOCTYPE HTML>

@@ -1,15 +1,17 @@
 import os, re, pymorphy2, json
 from math import log
-from .search import lemmatize
+from . import search
 
 class indexer():
     default_path = None
     json_name = None
+    sch = None
 
     def __init__(self, default_path, json_name):
         print("Using indexer default path is "+default_path+"; json name is "+json_name)
         self.default_path=default_path
         self.json_name=json_name
+        self.sch = search.search(default_path, json_name)
 
     def lemmatize(self, token):
         try:
@@ -24,7 +26,8 @@ class indexer():
         text = re.sub('[!"#$%&\'()*+,\../:;<=>?@[\\]^_`{|}~«–»—№<>]+', ' ', text)
         words = text.lower().split()
         # лемматизируем, выкидывая всё, что является числом и чья длина 2 или меньше
-        tokens = [lemmatize(w) for w in words if len(w) > 2 and not w.isdigit() and not w.split('-')[0].isdigit()]
+        tokens = [self.sch.lemmatize(w) for w in words if
+                  len(w) > 2 and not w.isdigit() and not w.split('-')[0].isdigit()]
         return tokens
 
     def process_files(self, path):
