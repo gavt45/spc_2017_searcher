@@ -22,16 +22,19 @@ class indexer():
             return token
 
     def clean(self, text):
+        print("CLEAN: text=" + text)
         # заменяем все знаки препинания, кроме дефиса, на пробелы
         text = re.sub('[!"#$%&\'()*+,\../:;<=>?@[\\]^_`{|}~«–»—№<>]+', ' ', text)
         words = text.lower().split()
         # лемматизируем, выкидывая всё, что является числом и чья длина 2 или меньше
         tokens = [self.sch.lemmatize(w) for w in words if
                   len(w) > 2 and not w.isdigit() and not w.split('-')[0].isdigit()]
+        print("CLEAN: tokens=" + tokens)
         return tokens
 
     def process_files(self, path):
         file2words = {}  # создаем пустой словарь
+        print("processing files in " + path + " ...")
         for file in os.listdir(path):
             fileName = path + file
             with open(fileName, encoding='utf-8') as f:    # открываем;
@@ -57,6 +60,7 @@ class indexer():
     def make_invertedIndex(self, index, filenames):
         invertedIndex, df = {}, {}
         for filename in index.keys():
+            print("!!PROCESSING " + filename)
             for word in index[filename].keys():
                 if word in df.keys():
                     df[word] += 1
