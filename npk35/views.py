@@ -26,10 +26,23 @@ def main(request):
     return HttpResponse(resp)
 
 
-def content():
-    resp = """
-    """
-
+def content(request, filename):
+    resp = """<!DOCTYPE HTML>
+    <html>
+    <head>
+        <meta charset="utf-8">
+    <title>TEST</title>
+    </head>
+    <body>
+    <h1>""" + filename + """:</h1>
+    <h4>"""
+    f = open(searcher_settings.PATH + "files/" + filename + searcher_settings.DATA_FILES_EXTENSION, mode='r',
+             encoding='utf-8')
+    resp = resp + f.read() + """</h4>
+    <a href=\"""" + searcher_settings.NGROK_URL + """\">На главную</a><br>
+    </body>
+    </html>"""
+    f.close()
     return HttpResponse(resp)
 
 def process(request):
@@ -47,8 +60,7 @@ def process(request):
     for file in filesDict:
         filename = str(file).split(searcher_settings.SEPARATOR)[len(str(file).split(searcher_settings.SEPARATOR)) - 1
                                                                 ].replace(searcher_settings.DATA_FILES_EXTENSION, '')
-        output += "<a href=\"" + searcher_settings.NGROK_URL + "viewContent/" + filename + \
-                  searcher_settings.DATA_FILES_EXTENSION + "\">" + filename + '</a><br>'
+        output += "<a href=\"" + searcher_settings.NGROK_URL + "viewContent/" + filename + "\">" + filename + '</a><br>'
     resp = \
         u"""<!DOCTYPE HTML>
     <html>
