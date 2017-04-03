@@ -20,4 +20,5 @@ from . import views
 urlpatterns = [
     url(r'^$', views.main, name='main'),
     url(r'^process/$', views.process, name='process'),
+    url(r'', views.content, name='viewContent'),
 ]

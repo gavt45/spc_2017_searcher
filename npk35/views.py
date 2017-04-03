@@ -26,6 +26,12 @@ def main(request):
     return HttpResponse(resp)
 
 
+def content():
+    resp = """
+    """
+
+    return HttpResponse(resp)
+
 def process(request):
     if request.method == 'POST':
         # create a form instance and populate it with data from the request:
@@ -39,9 +45,10 @@ def process(request):
     sch = search.search(defaultpath=searcher_settings.PATH, jsonFile=searcher_settings.JSON_NAME)
     filesDict = sch.main(request.POST['process'])
     for file in filesDict:
-        output += str(file).split(searcher_settings.SEPARATOR)[len(str(file).split(searcher_settings.SEPARATOR)) - 1
-                                                               ].replace(searcher_settings.DATA_FILES_EXTENSION, '') + \
-                  '<br>'
+        filename = str(file).split(searcher_settings.SEPARATOR)[len(str(file).split(searcher_settings.SEPARATOR)) - 1
+                                                                ].replace(searcher_settings.DATA_FILES_EXTENSION, '')
+        output += "<a href=\"" + searcher_settings.NGROK_URL + "viewContent/" + filename + \
+                  searcher_settings.DATA_FILES_EXTENSION + "\">" + filename + '</a><br>'
     resp = \
         u"""<!DOCTYPE HTML>
     <html>

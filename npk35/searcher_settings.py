@@ -1,4 +1,5 @@
-PATH = '/home/gav/Desktop/npk backend/'
-JSON_NAME = '.json'
+PATH = '/home/gav/PycharmProjects/spc_2017_searcher/npk35/backend/'
+JSON_NAME = 'test_3_gav.json'
 SEPARATOR = '/'
 DATA_FILES_EXTENSION = '.txt'
+NGROK_URL = 'http://127.0.0.1/'

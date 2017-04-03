@@ -65,6 +65,6 @@ class search():
         for doc in docs:
             cos_sim[doc] = sum([x * y for x, y in zip(idf_vectors[doc], query_vector)])
 
-        ranked_docs = sorted(cos_sim, key=lambda x: x[1])[::-1]
+        ranked_docs = sorted(cos_sim, key=lambda x: x[1])  # [::-1]
 
         return ranked_docs
