@@ -1,0 +1,134 @@
+[
+  {
+    "они": {
+      "/home/gav/Desktop/npk backend/files/кот.txt": [
+        0
+      ],
+      "/home/gav/Desktop/npk backend/files/комарики.txt": [
+        0
+      ]
+    },
+    "ехать": {
+      "/home/gav/Desktop/npk backend/files/кот.txt": [
+        1,
+        6
+      ],
+      "/home/gav/Desktop/npk backend/files/раки.txt": [
+        1
+      ],
+      "/home/gav/Desktop/npk backend/files/медведи.txt": [
+        0
+      ]
+    },
+    "кот": {
+      "/home/gav/Desktop/npk backend/files/кот.txt": [
+        2,
+        3
+      ],
+      "/home/gav/Desktop/npk backend/files/раки.txt": [
+        0
+      ]
+    },
+    "задом": {
+      "/home/gav/Desktop/npk backend/files/кот.txt": [
+        4
+      ]
+    },
+    "перед": {
+      "/home/gav/Desktop/npk backend/files/кот.txt": [
+        5
+      ]
+    },
+    "лететь": {
+      "/home/gav/Desktop/npk backend/files/комарики.txt": [
+        1
+      ]
+    },
+    "комарик": {
+      "/home/gav/Desktop/npk backend/files/комарики.txt": [
+        2
+      ]
+    },
+    "воздушный": {
+      "/home/gav/Desktop/npk backend/files/комарики.txt": [
+        3
+      ]
+    },
+    "шарик": {
+      "/home/gav/Desktop/npk backend/files/комарики.txt": [
+        4
+      ]
+    },
+    "рак": {
+      "/home/gav/Desktop/npk backend/files/раки.txt": [
+        2
+      ]
+    },
+    "хрома": {
+      "/home/gav/Desktop/npk backend/files/раки.txt": [
+        3
+      ]
+    },
+    "собака": {
+      "/home/gav/Desktop/npk backend/files/раки.txt": [
+        4
+      ]
+    },
+    "медведь": {
+      "/home/gav/Desktop/npk backend/files/медведи.txt": [
+        1
+      ]
+    },
+    "велосипед": {
+      "/home/gav/Desktop/npk backend/files/медведи.txt": [
+        2
+      ]
+    }
+  },
+  {
+    "они": 0.6931471805599453,
+    "ехать": 0.28768207245178085,
+    "кот": 0.6931471805599453,
+    "задом": 1.3862943611198906,
+    "перед": 1.3862943611198906,
+    "лететь": 1.3862943611198906,
+    "комарик": 1.3862943611198906,
+    "воздушный": 1.3862943611198906,
+    "шарик": 1.3862943611198906,
+    "рак": 1.3862943611198906,
+    "хрома": 1.3862943611198906,
+    "собака": 1.3862943611198906,
+    "медведь": 1.3862943611198906,
+    "велосипед": 1.3862943611198906
+  },
+  {
+    "/home/gav/Desktop/npk backend/files/кот.txt": [
+      "они",
+      "ехать",
+      "кот",
+      "кот",
+      "задом",
+      "перед",
+      "ехать"
+    ],
+    "/home/gav/Desktop/npk backend/files/комарики.txt": [
+      "они",
+      "лететь",
+      "комарик",
+      "воздушный",
+      "шарик"
+    ],
+    "/home/gav/Desktop/npk backend/files/раки.txt": [
+      "кот",
+      "ехать",
+      "рак",
+      "хрома",
+      "собака"
+    ],
+    "/home/gav/Desktop/npk backend/files/медведи.txt": [
+      "ехать",
+      "медведь",
+      "велосипед"
+    ]
+  }
+]
