@@ -1,6 +1,6 @@
 import os, re, pymorphy2, json
 from math import log
-from . import search
+import search
 
 class indexer():
     default_path = None
@@ -29,7 +29,7 @@ class indexer():
         # лемматизируем, выкидывая всё, что является числом и чья длина 2 или меньше
         tokens = [self.sch.lemmatize(w) for w in words if
                   len(w) > 2 and not w.isdigit() and not w.split('-')[0].isdigit()]
-        print("CLEAN: tokens=" + tokens)
+        print("CLEAN: tokens=" + str(tokens))
         return tokens
 
     def process_files(self, path):
@@ -78,7 +78,7 @@ class indexer():
         return invertedIndex,idf
 
     def Main(self):
-        file2words = self.process_files(self.default_path + 'files')
+        file2words = self.process_files(self.default_path)
         clean_docs = [' '.join(words) for words in file2words.values()]
         filenames = list(file2words.keys())
         index = self.make_index(file2words)
