@@ -8,11 +8,13 @@ class search():
     vectorizer = CountVectorizer()
     jsonFile = None
     defaultPath = None
+    prefix = None
 
-    def __init__(self, jsonFile, defaultpath):
+    def __init__(self, jsonFile, defaultpath, prefix):
         print("Using searcher; json file is: " + jsonFile + " & default path is: " + defaultpath)
         self.jsonFile = jsonFile
         self.defaultPath = defaultpath
+        self.prefix = prefix
 
     def lemmatize(self, token):
         try:
@@ -42,19 +44,20 @@ class search():
             return list(set(result[0]).intersection(*result))
 
     def main(self, query):
-        if query == '':
-            return []
-        with open(self.defaultPath + self.jsonFile) as f:
-            invertedIndex, idf, file2words = json.load(f)
+        with open(self.defaultPath + self.prefix + self.jsonFile) as f:
+            invertedIndex, idf, file2texts = json.load(f)
 
         docs = self.get_documents(query, invertedIndex)
-        clean_docs = [' '.join(file2words[doc]) for doc in docs]
+        clean_docs = [' '.join(self.clean(file2texts[doc])) for doc in docs]
 
         raw_v = self.vectorizer.fit_transform(clean_docs)
         raw_vectors = raw_v.toarray()
         raw_vectors = [list(v) for v in raw_vectors]
         vectors = dict(zip(docs, raw_vectors))
         vocab = self.vectorizer.get_feature_names()
+
+        for doc, v in vectors.items():
+            vectors[doc] = [w / len(list(filter(None, v))) for w in v]
 
         idf_vectors = {}
         for doc in vectors:
@@ -69,4 +72,6 @@ class search():
 
         ranked_docs = sorted(cos_sim, key=lambda x: x[1])[::-1]
 
-        return ranked_docs
+        result = [doc + '\n' + file2texts[doc][:200] + '...' for doc in ranked_docs]
+        print("result is:", result)
+        return result  # ranked_docs
