@@ -42,6 +42,8 @@ class search():
             return list(set(result[0]).intersection(*result))
 
     def main(self, query):
+        if query == '':
+            return []
         with open(self.defaultPath + self.jsonFile) as f:
             invertedIndex, idf, file2words = json.load(f)
 
@@ -65,6 +67,6 @@ class search():
         for doc in docs:
             cos_sim[doc] = sum([x * y for x, y in zip(idf_vectors[doc], query_vector)])
 
-        ranked_docs = sorted(cos_sim, key=lambda x: x[1])  # [::-1]
+        ranked_docs = sorted(cos_sim, key=lambda x: x[1])[::-1]
 
         return ranked_docs

@@ -55,8 +55,53 @@ def process(request):
 
     output = 'RESULTS:<br>'
     # query is request.POST['process']
+    if not str(request.POST).__contains__("process"):
+        resp = \
+            u"""<!DOCTYPE HTML>
+        <html>
+        <head>
+            <meta charset="utf-8">
+        <title>TEST</title>
+        </head>
+        <body>
+        <h1>
+        <form action="/process/" method="post">
+            <label for="process">Search: </label>
+            <input id="process" type="text" name="process" value="">
+            <input type="submit" value="OK">
+        </form>
+        </h1>
+        <h3>YOU SEARCHED:<br> {0}</h3>
+        <h4>Request is blank!</h4>
+        </body>
+        </html>""".format(output)
+        return HttpResponse(resp)
+
     sch = search.search(defaultpath=searcher_settings.PATH, jsonFile=searcher_settings.JSON_NAME)
     filesDict = sch.main(request.POST['process'])
+
+    if not filesDict:
+        resp = \
+            u"""<!DOCTYPE HTML>
+        <html>
+        <head>
+            <meta charset="utf-8">
+        <title>TEST</title>
+        </head>
+        <body>
+        <h1>
+        <form action="/process/" method="post">
+            <label for="process">Search: </label>
+            <input id="process" type="text" name="process" value="">
+            <input type="submit" value="OK">
+        </form>
+        </h1>
+        <h3>YOU SEARCHED:<br> {0}</h3>
+        <h4>Sorry, there is no results for your search!</h4>
+        </body>
+        </html>""".format(output)
+        return HttpResponse(resp)
+
     for file in filesDict:
         filename = str(file).split(searcher_settings.SEPARATOR)[len(str(file).split(searcher_settings.SEPARATOR)) - 1
                                                                 ].replace(searcher_settings.DATA_FILES_EXTENSION, '')
