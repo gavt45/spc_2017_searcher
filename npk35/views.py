@@ -36,7 +36,7 @@ def content(request, filename):
     <body>
     <h1>""" + filename + """:</h1>
     <h4>"""
-    f = open(searcher_settings.PATH + searcher_settings.PREFIX + filename + searcher_settings.DATA_FILES_EXTENSION,
+    f = open(searcher_settings.PATH + filename + searcher_settings.DATA_FILES_EXTENSION,
              mode='r',
              encoding='utf-8')
     resp = resp + f.read() + """</h4>
@@ -78,8 +78,7 @@ def process(request):
         </html>""".format(output)
         return HttpResponse(resp)
 
-    sch = search.search(defaultpath=searcher_settings.PATH, jsonFile=searcher_settings.JSON_NAME,
-                        prefix=searcher_settings.PREFIX)
+    sch = search.search(defaultpath=searcher_settings.PATH, jsonFile=searcher_settings.JSON_NAME)
     filesDict = sch.main(request.POST['process'])
 
     if not filesDict:
@@ -108,8 +107,7 @@ def process(request):
         filename = str(file).split(searcher_settings.SEPARATOR)[len(str(file).split(searcher_settings.SEPARATOR)) - 1
                                                                 ].replace(searcher_settings.DATA_FILES_EXTENSION, '')
         output += "<a href=\"" + searcher_settings.NGROK_URL + "viewContent/" + filename + "\">" + filename + ':</a>'
-        with open(
-                                        searcher_settings.PATH + searcher_settings.PREFIX + filename + searcher_settings.DATA_FILES_EXTENSION) as f:
+        with open(searcher_settings.PATH + filename + searcher_settings.DATA_FILES_EXTENSION) as f:
             output += "<h4>" + f.read(256) + "...</h4>"
 
     # print("Files dict is:", str(filesDict))

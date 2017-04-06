@@ -1,4 +1,4 @@
-PATH = '/home/gav/PycharmProjects/spc_2017_searcher/npk35/backend/'
+PATH = '/home/gav/PycharmProjects/spc_2017_searcher/npk35/backend/files/'
 JSON_NAME = 'test_3_gav.json'
 SEPARATOR = '/'
 DATA_FILES_EXTENSION = '.txt'
